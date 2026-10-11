@@ -1,0 +1,7 @@
+/vendor/
+/js/node_modules/
+/.phpunit.result.cache
+/coverage/
+/benchmarks/output/
+/artifacts/
+/composer.lock

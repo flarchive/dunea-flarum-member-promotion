@@ -1,0 +1,143 @@
+dunea-member-promotion:
+  admin:
+    tabs:
+      label: Member promotion administration
+      settings: Global settings
+      rules: Promotion rules
+      users: User inspection
+      status: Runtime status
+    settings:
+      title: Global settings
+      enabled: Enable automatic promotion
+      enabled_help: Disabled by default. Enabling creates a background scan; the HTTP request never scans all users.
+      scheduler_required: Task scheduling is required
+      scheduler_required_help: Automatic promotion only works when the Flarum scheduler runs php flarum schedule:run every minute; enabling this switch alone will not process background tasks.
+      excluded_groups: Excluded groups
+      no_excluded_groups: No eligible custom groups are available.
+      retention: Runtime log retention (days)
+    rules:
+      title: Promotion rules
+      new: New rule
+      edit_title: Edit rule
+      name: Rule name
+      name_placeholder: "e.g. Regular member"
+      description: Description
+      description_placeholder: "Optional, e.g. registered for 30 days with 20 valid replies"
+      prerequisite: Prerequisite group
+      target: Target group
+      select_group: Select a target group
+      conditions: Conditions
+      order: Priority / stable order
+      priority: Priority
+      age: Registration age
+      replies: Valid replies
+      hours: Hours
+      days: Days
+      operator: operator
+      value: value
+      unit: unit
+      and: and
+      none: None
+      remove_prerequisite: Remove prerequisite after promotion (only when plugin ownership is proven)
+      enabled: Enable rule
+      empty: No promotion rules yet. Select “New rule” to get started.
+      no_groups: No eligible custom groups are available. Create a group on the Permissions page first.
+      structural_confirm: This is a structural change. Existing memberships are not migrated or revoked; only future evaluations change. Continue?
+      copy_confirm: Copy the rule “{name}”? The copy is disabled by default so it can be reviewed before activation.
+      delete_confirm: Delete the rule “{name}”? It will be disabled and removed from the list immediately. Historical grants and audit records are retained, and the rule cannot be restored in the interface.
+    users:
+      title: User inspection
+      search: Username or user ID
+      search_button: Search
+      pause: Pause automatic promotion
+      resume: Resume automatic promotion
+      check_now: Check now
+      revoke: Revoke and block restoration
+      unblock: Clear block
+      metrics: "Valid replies: {replies}; registration age: {minutes} minutes"
+      no_results: No matching users found
+      no_rules: No promotion rules are currently available for inspection
+      revoke_confirm: This removes the group granted by this rule and blocks automatic restoration. Continue?
+    logs:
+      title: Execution log
+      time: Time (UTC)
+      user: User
+      rule: Rule
+      status: Status
+      reason: Reason
+      groups: Added / removed
+      more: Load more
+      user_filter: User ID
+      all_statuses: All statuses
+      apply: Filter
+      reset: Reset
+      empty: No execution records yet
+      loading: Loading execution records
+    status:
+      title: Runtime status
+      heartbeat: Last completion (UTC)
+      no_heartbeat: No run detected yet
+      pending: Pending users
+      failed: Failed jobs
+      last_error: Latest error
+      type: Job type
+      progress: Progress
+      error: Error
+      no_jobs: No jobs are currently running
+      loading: Loading runtime status
+      unavailable: Runtime status is temporarily unavailable. Please try again.
+    values:
+      status:
+        pending: Pending
+        processing: Processing
+        qualified: Qualified
+        would_promote: Would promote
+        promoted: Promoted
+        success: Success
+        completed: Completed
+        skipped: Skipped
+        failed: Failed
+      reason:
+        user_missing: User not found
+        global_disabled: Automatic promotion is disabled
+        administrator: Administrator accounts are excluded
+        moderator: Moderator accounts are excluded
+        excluded_group: User belongs to an excluded group
+        user_paused: Automatic promotion is paused for this user
+        suspended: User is suspended
+        prerequisite_missing: Prerequisite group is missing
+        age_not_met: Registration age is not met
+        replies_not_met: Valid reply count is not met
+        target_group_missing: Target group no longer exists
+        manual_revoke_blocked: Restoration is blocked after manual revocation
+        historical_structure_retained: Historical membership retained after structural change
+        manual_revoke_detected: Manual membership removal detected
+        conditions_met: All conditions are met
+        already_granted: Membership was already granted
+        already_member_manual_or_external: User already belongs to the target group
+        granted_then_consumed_by_later_stage: Membership was consumed by a later stage
+        already_member_concurrent: Membership was added concurrently
+        idempotent_duplicate: Duplicate request was ignored
+        membership_missing_detected: Granted membership is missing
+        manual_revoke_event: Membership was manually removed
+        admin_revoke: Membership was revoked by an administrator
+      job_type:
+        full_scan: Full scan
+        rule_scan: Rule scan
+    actions: Actions
+    save: Save
+    cancel: Cancel
+    edit: Edit
+    copy: Copy
+    delete: Delete
+    enabled: Enabled
+    disabled: Disabled
+    refresh: Refresh
+    load_failed: Could not load member promotion administration data.
+    messages:
+      settings_saved: Global settings saved
+      rule_saved: Rule saved
+      rule_copied: Rule copy created
+      rule_deleted: Rule deleted; historical audit records were retained
+      user_checked: User inspection completed and the execution log was refreshed
+      user_updated: User state updated

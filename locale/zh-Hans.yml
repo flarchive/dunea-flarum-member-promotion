@@ -1,0 +1,143 @@
+dunea-member-promotion:
+  admin:
+    tabs:
+      label: 会员晋级管理
+      settings: 全局设置
+      rules: 晋级规则
+      users: 用户检查
+      status: 运行状态
+    settings:
+      title: 全局设置
+      enabled: 启用自动晋级
+      enabled_help: 默认关闭。启用时会创建后台全量扫描任务，不会在当前网页请求中扫描用户。
+      scheduler_required: 必须启用任务调度
+      scheduler_required_help: 自动晋级仅在 Flarum 调度器每分钟执行 php flarum schedule:run 时生效；仅打开此开关不会处理后台任务。
+      excluded_groups: 排除用户组
+      no_excluded_groups: 当前没有可供选择的自定义用户组。
+      retention: 运行日志保留天数
+    rules:
+      title: 晋级规则
+      new: 新建规则
+      edit_title: 编辑规则
+      name: 规则名称
+      name_placeholder: 例如：正式会员
+      description: 说明
+      description_placeholder: 可选，例如：注册满 30 天且有效回复达到 20 条
+      prerequisite: 前置用户组
+      target: 目标用户组
+      select_group: 请选择目标用户组
+      conditions: 条件
+      order: 优先级 / 稳定次序
+      priority: 优先级
+      age: 注册时长
+      replies: 有效回复数
+      hours: 小时
+      days: 天
+      operator: 运算符
+      value: 数值
+      unit: 单位
+      and: 且
+      none: 无
+      remove_prerequisite: 晋级后移除前置组（仅插件可确认的授予来源）
+      enabled: 启用规则
+      empty: 还没有晋级规则。点击“新建规则”开始配置。
+      no_groups: 没有可用的自定义用户组，请先在权限页面创建用户组。
+      structural_confirm: 这是结构性修改。历史成员不会被迁移或撤销，确认后仅影响后续评估。是否继续？
+      copy_confirm: 确认复制规则“{name}”吗？副本默认停用，可编辑确认后再启用。
+      delete_confirm: 确认删除规则“{name}”吗？规则将立即停用并从列表移除，历史授予和审计记录会保留，且无法在界面恢复。
+    users:
+      title: 用户检查
+      search: 输入用户名或用户 ID
+      search_button: 搜索
+      pause: 暂停自动晋级
+      resume: 恢复自动晋级
+      check_now: 立即检查
+      revoke: 撤销并阻止恢复
+      unblock: 解除阻止
+      metrics: "有效回复：{replies}；注册时长：{minutes} 分钟"
+      no_results: 没有找到匹配的用户
+      no_rules: 当前没有可用于检查的晋级规则
+      revoke_confirm: 撤销后将移除该规则授予的用户组，并阻止自动恢复。是否继续？
+    logs:
+      title: 执行记录
+      time: 时间（UTC）
+      user: 用户
+      rule: 规则
+      status: 状态
+      reason: 原因
+      groups: 加组 / 移组
+      more: 加载更多
+      user_filter: 用户 ID
+      all_statuses: 全部状态
+      apply: 筛选
+      reset: 重置
+      empty: 暂无执行记录
+      loading: 正在载入执行记录
+    status:
+      title: 运行状态
+      heartbeat: 最近完成时间（UTC）
+      no_heartbeat: 尚未检测到运行
+      pending: 待处理用户
+      failed: 失败任务
+      last_error: 最近错误
+      type: 任务类型
+      progress: 进度
+      error: 错误
+      no_jobs: 当前没有运行中的任务
+      loading: 正在载入运行状态
+      unavailable: 暂时无法载入运行状态，请重试
+    values:
+      status:
+        pending: 等待处理
+        processing: 处理中
+        qualified: 符合条件
+        would_promote: 可晋级
+        promoted: 已晋级
+        success: 成功
+        completed: 已完成
+        skipped: 已跳过
+        failed: 失败
+      reason:
+        user_missing: 用户不存在
+        global_disabled: 自动晋级未启用
+        administrator: 已排除管理员账号
+        moderator: 已排除版主账号
+        excluded_group: 用户属于排除用户组
+        user_paused: 该用户已暂停自动晋级
+        suspended: 用户已被停权
+        prerequisite_missing: 不满足前置用户组条件
+        age_not_met: 注册时长不足
+        replies_not_met: 有效回复数不足
+        target_group_missing: 目标用户组已不存在
+        manual_revoke_blocked: 手动撤销后已阻止恢复
+        historical_structure_retained: 结构调整后保留历史成员关系
+        manual_revoke_detected: 检测到成员关系被手动移除
+        conditions_met: 已满足全部条件
+        already_granted: 已授予该成员关系
+        already_member_manual_or_external: 用户已通过其他方式加入目标组
+        granted_then_consumed_by_later_stage: 成员关系已被后续阶段消费
+        already_member_concurrent: 成员关系已被并发添加
+        idempotent_duplicate: 已忽略重复请求
+        membership_missing_detected: 检测到已授予的成员关系缺失
+        manual_revoke_event: 成员关系已被手动移除
+        admin_revoke: 管理员已撤销成员关系
+      job_type:
+        full_scan: 全量扫描
+        rule_scan: 规则扫描
+    actions: 操作
+    save: 保存
+    cancel: 取消
+    edit: 编辑
+    copy: 复制
+    delete: 删除
+    enabled: 已启用
+    disabled: 已停用
+    refresh: 刷新
+    load_failed: 无法载入会员晋级管理数据。
+    messages:
+      settings_saved: 全局设置已保存
+      rule_saved: 规则已保存
+      rule_copied: 规则副本已创建
+      rule_deleted: 规则已删除，历史审计记录已保留
+      user_checked: 用户检查已完成，执行记录已刷新
+      user_updated: 用户状态已更新

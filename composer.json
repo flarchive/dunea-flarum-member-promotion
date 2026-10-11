@@ -1,0 +1,53 @@
+{
+  "name": "dunea/flarum-member-promotion",
+  "description": "A configurable, staged and auditable member promotion system for Flarum 1.8.",
+  "type": "flarum-extension",
+  "keywords": ["flarum", "promotion", "groups", "membership"],
+  "license": "MIT",
+  "require": {
+    "php": "^8.1 || ^8.2 || ^8.3 || ^8.4",
+    "flarum/core": "^1.8.19"
+  },
+  "require-dev": {
+    "flarum/approval": "^1.8",
+    "flarum/testing": "^1.8",
+    "phpunit/phpunit": "^9.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Dunea\\MemberPromotion\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Dunea\\MemberPromotion\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "Member Promotion",
+      "icon": {
+        "name": "fas fa-level-up-alt",
+        "backgroundColor": "#4f6673",
+        "color": "#ffffff"
+      }
+    },
+    "flarum-cli": {
+      "modules": {
+        "admin": true
+      }
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "test:unit": "phpunit --testsuite unit",
+    "test:integration": "phpunit --testsuite integration",
+    "test:setup": "@php tests/integration/setup.php"
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "flarum/composer-installer": true
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "@dunea/flarum-member-promotion",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "check-typings": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "devDependencies": {
+    "@types/mithril": "^2.2.7",
+    "@types/node": "18.19.130",
+    "flarum-tsconfig": "^1.0.2",
+    "flarum-webpack-config": "^2.0.0",
+    "typescript": "^4.9.5",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^4.10.0"
+  }
+}

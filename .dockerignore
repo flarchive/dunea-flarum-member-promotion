@@ -1,0 +1,8 @@
+.git
+.agents
+.codex
+vendor
+js/node_modules
+.phpunit.result.cache
+composer.lock
+benchmarks/output

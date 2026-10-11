@@ -1,0 +1,72 @@
+name: flarum-member-promotion-test
+
+x-flarum-environment: &flarum-environment
+  TZ: Asia/Taipei
+  PUID: "1000"
+  PGID: "1000"
+  FLARUM_BASE_URL: http://localhost:${MEMBER_PROMOTION_TEST_PORT:-8088}
+  FLARUM_FORUM_TITLE: Member Promotion Test
+  FLARUM_DEBUG: "true"
+  FLARUM_ANNOUNCEMENTS_DISABLED: "true"
+  DB_HOST: database
+  DB_PORT: "3306"
+  DB_NAME: flarum_test
+  DB_USER: flarum_test
+  DB_PASSWORD: local_test_only
+  DB_PREFIX: flarum_
+
+services:
+  database:
+    image: mariadb:10.11
+    environment:
+      TZ: Asia/Taipei
+      MARIADB_DATABASE: flarum_test
+      MARIADB_USER: flarum_test
+      MARIADB_PASSWORD: local_test_only
+      MARIADB_ROOT_PASSWORD: local_root_only
+    volumes:
+      - database-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  flarum:
+    image: dunea/flarum-member-promotion:test
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    environment: *flarum-environment
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${MEMBER_PROMOTION_TEST_PORT:-8088}:8000"
+    volumes:
+      - flarum-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000"]
+      interval: 3s
+      timeout: 5s
+      retries: 40
+    restart: unless-stopped
+
+  scheduler:
+    image: dunea/flarum-member-promotion:test
+    profiles: ["scheduler"]
+    environment:
+      <<: *flarum-environment
+      SIDECAR_CRON: "1"
+      CRON_SCHEDULE: "* * * * *"
+    depends_on:
+      flarum:
+        condition: service_healthy
+    volumes:
+      - flarum-data:/data
+    restart: unless-stopped
+
+volumes:
+  database-data:
+  flarum-data:
